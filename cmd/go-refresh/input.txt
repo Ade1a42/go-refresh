@@ -1,0 +1,17 @@
+-1- Ready, set, go (up) !
+-2- Ready, set, gO (up, 2) !
+-3- I should stop SHOUTING (low)
+-4- I SHOULD stop SHOUTING (low, 3)
+-5- Welcome to the Brooklyn bridge (cap)
+-6- Welcome to the Brooklyn bridge (cap, 3)
+-7- Welcome to the Brooklyn bridge (cap, 0)
+-8- Welcome to the Brooklyn bridge (cap, -9) 
+-9- Simply add 42 (hex) and 10 (bin) and you will see the result is 68.
+-10- There it was. A amazing rock! May be I forgot to add another a apple, an orange and others.
+-11- I was sitting over there ,and then BAMM !!
+-12- I was thinking ... You were right
+-0- Actually :  ' this is schould work perfect ' , ' dkjdnjkdd '
+-14- As Elton John said : ' I am the most well-known homosexual in the world '
+-13- I am exactly how they describe me : ' awesome '
+
+
