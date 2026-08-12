@@ -2,12 +2,12 @@ package punct
 
 func IsPunctuations(word string) bool {
 	if len(word) == 1 {
-		if ( word == "." || word == "," || word == "!" || word == "?" || word == ":" ){
+		if word == "." || word == "," || word == "!" || word == "?" || word == ":" {
 			return true
 		}
 	} else if len(word) > 1 {
 		for i := 0; i < len(word); i++ {
-			if !( string(word[i]) == "." || string(word[i]) == "," || string(word[i]) == "!" || string(word[i]) == "?" || string(word[i]) == ":" ){
+			if !(string(word[i]) == "." || string(word[i]) == "," || string(word[i]) == "!" || string(word[i]) == "?" || string(word[i]) == ":") {
 				return false
 			}
 		}

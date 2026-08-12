@@ -1,30 +1,30 @@
 package punct
 
 import (
-	"testing"
 	"reflect"
+	"testing"
 )
 
 type testCaseArrayFunc2 struct {
-	CaseName string
+	CaseName   string
 	InputArray []string
-	InputIndex int 
-	Expected []string
+	InputIndex int
+	Expected   []string
 }
 
-func TestFixSpacing(t *testing.T){
+func TestFixSpacing(t *testing.T) {
 	tests := []testCaseArrayFunc2{
 		{
-			CaseName: "ex1",
-			InputArray: []string{"I", "was", "sitting", "over", "there", ",", "and", "then", "BAMM!!",},
+			CaseName:   "ex1",
+			InputArray: []string{"I", "was", "sitting", "over", "there", ",", "and", "then", "BAMM!!"},
 			InputIndex: 5,
-			Expected: []string{"I", "was", "sitting", "over", "there,", "and", "then", "BAMM!!"},
+			Expected:   []string{"I", "was", "sitting", "over", "there,", "and", "then", "BAMM!!"},
 		},
 		{
-			CaseName: "ex2",
+			CaseName:   "ex2",
 			InputArray: []string{"I", "was", "thinking", "...", "You", "were", "right"},
 			InputIndex: 3,
-			Expected: []string{"I", "was", "thinking...", "You", "were", "right"},
+			Expected:   []string{"I", "was", "thinking...", "You", "were", "right"},
 		},
 		// {
 		// 	CaseName: "",
@@ -35,7 +35,7 @@ func TestFixSpacing(t *testing.T){
 	}
 
 	for _, ts := range tests {
-		t.Run(ts.CaseName, func(t *testing.T){
+		t.Run(ts.CaseName, func(t *testing.T) {
 			actual := FixSpacing(ts.InputArray, ts.InputIndex)
 
 			if !(reflect.DeepEqual(actual, ts.Expected)) {
@@ -47,26 +47,26 @@ func TestFixSpacing(t *testing.T){
 
 type TestCaseBoolFunc struct {
 	CaseName string
-	Input string 
+	Input    string
 	Expected bool
 }
 
-func TestIsPunctuations(t *testing.T){
+func TestIsPunctuations(t *testing.T) {
 	tests := []TestCaseBoolFunc{
 		{
 			CaseName: "ex1",
-			Input: ".",
+			Input:    ".",
 			Expected: true,
 		},
 		{
 			CaseName: "ex2",
-			Input: "....-",
+			Input:    "....-",
 			Expected: false,
 		},
 	}
 
 	for _, ts := range tests {
-		t.Run(ts.CaseName, func(t *testing.T){
+		t.Run(ts.CaseName, func(t *testing.T) {
 			actual := IsPunctuations(ts.Input)
 			if ts.Expected != actual {
 				t.Errorf("Error on testing %v:\nExpected: %v;\nGot: %v\n", ts.CaseName, ts.Expected, actual)
@@ -74,5 +74,3 @@ func TestIsPunctuations(t *testing.T){
 		})
 	}
 }
-
-
