@@ -4,7 +4,7 @@ A Go-based text processing and auto-correction tool that applies transformation 
 
 ## Overview
 
-`go-refresh` reads an input text file, applies a series of transformations (capitalization, punctuation fixing, number conversion, quote formatting, and article correction), and writes the result to an output file. It includes optional language detection and keyword extraction features using simple heuristics.
+`go-refresh` reads an input text file, applies a series of transformations (capitalization, punctuation fixing, number conversion, quote formatting, and article correction), and writes the result to an output file. It includes optional language detection using a simple heuristic.
 
 ## Features
 
@@ -15,7 +15,6 @@ A Go-based text processing and auto-correction tool that applies transformation 
 - **Quote Handling**: Properly format single quotes around text without extra spaces
 - **Article Correction**: Replace `a` with `an` before vowels and the letter `h`
 - **Language Detection** (`--lang` flag): Detect whether text is primarily English or French
-- **Keyword Extraction** (`--keywords` flag): Extract top 5 keywords from processed text
 
 ## Architecture
 ```
@@ -89,9 +88,14 @@ go run ./cmd/go-refresh samples/sample1.in.txt samples/sample1.out.txt
 go run ./cmd/go-refresh samples/sample1.in.txt samples/sample1.out.txt --lang
 ```
 
-**Extract keywords:**
+## Using Make
+
+Common tasks are wrapped in the Makefile:
+
 ```bash
-go run ./cmd/go-refresh samples/sample1.in.txt samples/sample1.out.txt --keywords
+make build   # compiles the binary to ./go-refresh
+make test    # runs go test ./...
+make fmt     # runs go fmt ./...
 ```
 
 ## Transformation Rules (in order)
@@ -117,23 +121,15 @@ Language: French (75%)
 Language: Unknown
 ```
 
-## Keyword Extraction (`--keywords`)
-
-Extracts top 5 most frequent words after removing stopwords and sorting alphabetically on ties.
-
-**Stopwords**: the, and, of, to, is, in, it, that, a, an, for, on, with, as, by, at, from, this, these, those, de, la, le, les, et, un, une, des
-
-Output format:
-```
-Keywords: word1, word2, word3, word4, word5
-Keywords: (none)
-```
-
 # How to test
 
 Run all tests from the project root:
 ```bash
 go test ./...
+```
+or
+```bash
+make test
 ```
 
 Run tests for a specific package:
@@ -169,10 +165,18 @@ Ensure consistent formatting:
 ```bash
 go fmt ./...
 ```
+or
+```bash
+make fmt
+```
 
 Check for errors:
 ```bash
 go build ./cmd/go-refresh
+```
+or
+```bash
+make build
 ```
 
 ## Dependencies
@@ -182,7 +186,6 @@ This project uses only Go standard library packages:
 - `regexp` - tokenization
 - `strconv` - number conversion
 - `math` - rounding for percentages
-- `sort` - keyword frequency sorting
 - `unicode` - character classification
 
 No external dependencies required.
@@ -195,11 +198,10 @@ No external dependencies required.
 - `internal/punct/` - Punctuation spacing corrections
 - `internal/quotes/` - Single quote handling
 - `internal/grammar/` - Article correction (a/an)
-- `internal/ai/` - Language detection and keyword extraction
+- `internal/ai/` - Language detection
 - `internal/pipeline/` - Text tokenization and processing orchestration
 - `samples/` - Example input and output files
 
 ## License
 
 Educational project for learning Go text processing and testing.
-
