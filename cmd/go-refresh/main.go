@@ -16,7 +16,6 @@ func main() {
 		fmt.Println("Note: You can rename your txt file as you want :)")
 		fmt.Println("Text processing: go run . ../../samples/sample1.in.txt ../../samples/sample1.out.txt")
 		fmt.Println("Identify language: go run . ../../samples/sample1.in.txt ../../samples/sample1.out.txt --lang")
-		fmt.Println("Extract keywords: go run . ../../samples/sample1.in.txt ../../samples/sample1.out.txt --keywords")
 		os.Exit(1)
 	}
 
@@ -47,14 +46,11 @@ func main() {
 	}
 
 	if len(os.Args) == 4 {
-		switch os.Args[3] {
-		case "--lang":
-			fmt.Println(ai.DetectLanguage(outputText))
-		case "--keywords":
-			fmt.Println(ai.ExtractKeywords(outputText))
-		default:
+		if os.Args[3] != "--lang" {
 			fmt.Printf("Error: unknown flag %s\n", os.Args[3])
 			os.Exit(1)
 		}
+
+		fmt.Println(ai.DetectLanguage(outputText))
 	}
 }
