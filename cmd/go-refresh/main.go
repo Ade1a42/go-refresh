@@ -1,31 +1,32 @@
 package main
 
-import ( 
+import (
 	"fmt"
+	"log"
 	"os"
 	"strings"
-	"log"
+
+	"goRefresh/internal/ai"
 	"goRefresh/internal/pipeline"
 )
 
-func main(){
+func main() {
 	if len(os.Args) < 3 || len(os.Args) > 4 {
 		fmt.Println("==== To process text choose syntax based on your goal :) ====")
 		fmt.Println("Note: You can rename your txt file as you want :)")
-		fmt.Println("Text processing: go run . input.txt output.txt")
-		fmt.Println("Identify language: go run . input.txt output.txt --lang")
+		fmt.Println("Text processing: go run . ../../samples/sample1.in.txt ../../samples/sample1.out.txt")
+		fmt.Println("Identify language: go run . ../../samples/sample1.in.txt ../../samples/sample1.out.txt --lang")
+		fmt.Println("Extract keywords: go run . ../../samples/sample1.in.txt ../../samples/sample1.out.txt --keywords")
 		os.Exit(1)
 	}
 
 	input := os.Args[1]
 	output := os.Args[2]
-	
-	// only accepting txt files
-	if !(strings.HasSuffix(input, ".txt")) || !(strings.HasSuffix(output, ".txt")){
+
+	if !(strings.HasSuffix(input, ".txt")) || !(strings.HasSuffix(output, ".txt")) {
 		fmt.Println("Error: only .txt files accepted")
 		os.Exit(1)
 	}
-
 
 	content, err := os.ReadFile(input)
 	if err != nil {
@@ -39,16 +40,21 @@ func main(){
 
 	tokens := pipeline.Tokenizer(string(content))
 	tokens = pipeline.Process(tokens)
+	outputText := strings.Join(tokens, " ")
 
-	fmt.Println(tokens)
+	if err := os.WriteFile(output, []byte(outputText), 0644); err != nil {
+		log.Fatal(err)
+	}
 
-	// text processing
-		// tag + remove it
-		// all punctuation
-		// article 
-
-
-	// check weather have language keyword 
-
-	// output overwrite if need
+	if len(os.Args) == 4 {
+		switch os.Args[3] {
+		case "--lang":
+			fmt.Println(ai.DetectLanguage(outputText))
+		case "--keywords":
+			fmt.Println(ai.ExtractKeywords(outputText))
+		default:
+			fmt.Printf("Error: unknown flag %s\n", os.Args[3])
+			os.Exit(1)
+		}
+	}
 }

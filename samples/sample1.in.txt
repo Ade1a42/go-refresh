@@ -1,0 +1,5 @@
+-1- Ready, set, go (up) !
+-2- Ready, set, gO (up, 2) !
+-3- I should stop SHOUTING (low)
+-4- I SHOULD stop SHOUTING (low, 3)
+-5- Welcome to the Brooklyn bridge (cap)
